@@ -1,31 +1,24 @@
 --Cosntrutor para definir que los coeficientes
-data Fraccion = Coeficientes Int Int deriving (Show)
+data Fraccion = Coeficientes Int Int 
+                        deriving (Eq)
 
--- Suma y Resta                                   
-suma :: Fraccion -> Fraccion -> [Char]
-suma ( Coeficientes x1 y1 ) ( Coeficientes x2 y2 ) = if( y1 == 0 || y2 == 0 )
-                                                 then error "No se pude dividir entre cero"
-                                               else if (x1==0||x2==0)
-                                                 then "0"
-                                               else
-                                                 ("Res = " ++ show (x1*y2 + x2*y1) ++ "/" ++ show (y1*y2) )
-
+instance Show Fraccion where
+                show(Coeficientes n d) = show(n) ++ "/"++ show (d)
 
                                                
---generaD (Coeficientes num den) = 
 
 
-resta(Coeficientes a b) (Coeficientes c d) = Coeficientes ((a*d)-(b*c)) (b*d)
+resta(Coeficientes n1 d1) (Coeficientes n2 d2) = Coeficientes ((n1*d2)-(n2*d1)) (d1*d2)
+
+fraccionEgipcia n d = fEgipcia(Coeficientes n d) 
 
  
-fEgipcia (Coeficientes n d) = [Coeficientes n d]
-fEgipcia (Coeficientes n d) = if n>1
-                              then 
-                              (Coeficientes 1 ((div d n)+1)):fEgipcia ( resta (Coeficientes n d) (Coeficientes 1 (div d n)+1 )
+fEgipcia (Coeficientes 1 d) = [Coeficientes 1 d]
+fEgipcia (Coeficientes n d) 
+                            |(n>1) = 
+                            (Coeficientes n d):(Coeficientes 1 ((div d n)+1)):fEgipcia ( resta (Coeficientes n d) (Coeficientes 1 ((div d n)+1) )) 
+                               
                                  
-                              else
-                                [Coeficientes n d]
-                                  
 
        
                                     
