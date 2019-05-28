@@ -31,6 +31,11 @@ hazMenu opcion
                     putStrLn "Ingresa una fraccion"
                     f <- getLine
                     writeFile "FraccionEgipcia.txt" (show (fEgipcia (read f::FraccionNormal)))
+                    putStrLn ("")
+                    putStrLn "           Contenido en FraccionEgipcia.txt"
+                    f<-readFile "FraccionEgipcia.txt"
+                    putStr "La fraccion egipcia es:"
+                    putStrLn (show (read f::FraccEgip))
                    
                     menu
                     
