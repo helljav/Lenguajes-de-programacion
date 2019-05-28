@@ -3,14 +3,39 @@ import Data.Char
 main::IO()
 main = do menu
 
+--Cosntrutor para definir que los coeficientes
+data Fraccion = Coeficientes Int  Int 
+                        deriving (Eq)
+                        
+--Nos ayuda a definir las variables fraccion y fraccionegipcia                       
+type FraccEgip = [Fraccion]
+type FraccionNormal = Fraccion
+
+
+--Visualiza una fraccion
+instance Show Fraccion where
+                show(Coeficientes n d) = show(n) ++ "/"++ show (d)
+                
+--Lee una fraccion               
+instance Read Fraccion where 
+                readsPrec _ = readFracc
+
 menu = 
     do
         opcion <- pideOpcion
-        putStrLn("Elegiste: "  ++ (show opcion))
         hazMenu(read opcion)
 
 hazMenu opcion
-            |(opcion ==1)=
+           |(opcion ==1)=
+                do
+                    putStrLn "Ingresa una fraccion"
+                    f <- getLine
+                    writeFile "FraccionEgipcia.txt" (show (fEgipcia (read f::FraccionNormal)))
+                   
+                    menu
+                    
+                    
+            |(opcion ==2)=
                 do
                     putStrLn "Dame tu fraccion egipcia"
                     f <- getLine
@@ -28,14 +53,23 @@ hazMenu opcion
                     menu
             |(opcion == 4) =
                 return()
+           
 
+fraccion str = fraccionEgipcia (read n::Int )(read d::Int)
+            where
+            n = tomaNum str
+            (d,resto) = tomaDen str
+                
 
 pideOpcion = 
             do
-            putStrLn("Hola tus opciones son")
+            putStrLn ("")
+            putStrLn ("")
+            putStrLn("Hola tus opciones son: ")
+            putStrLn ("")
             putStrLn("1) Convertir una fraccion a fraccion egipcia desde el teclado")
-            putStrLn("2) Hacer la conversión de la fracción y escribirla en un archivo")
-            putStrLn("3) Leer una fracción egipcia desde archivo")
+            putStrLn("2) Hacer la conversion de la fraccion y escribirla en un archivo")
+            putStrLn("3) Leer una fraccion egipcia desde archivo")
             putStrLn("4) Salir")
             r <- getLine
             return r
@@ -44,17 +78,7 @@ pideOpcion =
 
         
 
---Cosntrutor para definir que los coeficientes
-data Fraccion = Coeficientes Int  Int 
-                        deriving (Eq)
-                        
-type FraccEgip = [Fraccion]
 
-instance Show Fraccion where
-                show(Coeficientes n d) = show(n) ++ "/"++ show (d)
-                
-instance Read Fraccion where 
-                readsPrec _ = readFracc
 
 readFracc :: String -> [(Fraccion, String)]
 readFracc str = [(Coeficientes (read n) (read d), resto)]
