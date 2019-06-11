@@ -28,15 +28,11 @@ menu =
 hazMenu opcion
            |(opcion ==1)=
                 do
-                    putStrLn "Ingresa una fraccion"
+                    putStrLn "Ingresa una fraccion de la forma:  N/D"
                     f <- getLine
                     writeFile "FraccionEgipcia.txt" (show (fEgipcia (read f::FraccionNormal)))
-                    putStrLn ("")
-                    putStrLn "           Contenido en FraccionEgipcia.txt"
-                    f<-readFile "FraccionEgipcia.txt"
-                    putStr "La fraccion egipcia es:"
-                    putStrLn (show (read f::FraccEgip))
-                   
+                    putStrLn(" ")
+                    putStrLn ("LISTO LA FRACCION SE ENCUENTRA EN:  FraccionEgipcia.tx")                
                     menu
                     
                     
@@ -48,22 +44,22 @@ hazMenu opcion
                     menu
             |(opcion == 2)=
                 do
-                    f<-readFile "Fraccion.txt"
-                    putStr "La fraccion egipcia es:"
-                    putStrLn (show (read f::FraccEgip))
-                    menu
-            |(opcion == 3)=
-                do
                     writeFile "Fraccion.txt" "[]"
                     menu
+                    
+            |(opcion == 3)=
+                do
+                    putStrLn ("Contenido del Archivo FraccionEgipcia.txt")    
+                    f<-readFile "FraccionEgipcia.txt"
+                    putStr "La fraccion egipcia es:  "
+                    putStrLn (show (read f::FraccEgip))
+                    menu
+                   
             |(opcion == 4) =
                 return()
            
 
-fraccion str = fraccionEgipcia (read n::Int )(read d::Int)
-            where
-            n = tomaNum str
-            (d,resto) = tomaDen str
+
                 
 
 pideOpcion = 
@@ -73,7 +69,7 @@ pideOpcion =
             putStrLn("Hola tus opciones son: ")
             putStrLn ("")
             putStrLn("1) Convertir una fraccion a fraccion egipcia desde el teclado")
-            putStrLn("2) Hacer la conversion de la fraccion y escribirla en un archivo")
+            putStrLn("2) Hacer la conversion de la fraccion egipcia desde ek teclado y escribirla en un archivo")
             putStrLn("3) Leer una fraccion egipcia desde archivo")
             putStrLn("4) Salir")
             r <- getLine
@@ -107,7 +103,7 @@ mcm a b = div (a*b) (mcd a b)
 resta (Coeficientes n1 d1) (Coeficientes n2 d2) = Coeficientes (((div (mcm d1 d2) d1)*n1)-((div (mcm d1 d2) d2)*n2)) (mcm d1 d2)
 
 --Fraccion Egipcia
-fraccionEgipcia n d = fEgipcia(Coeficientes n d) 
+--fraccionEgipcia n d = fEgipcia(Coeficientes n d) 
 fEgipcia (Coeficientes 1 d) = [Coeficientes 1 d]
 fEgipcia (Coeficientes n d) 
                             |(n>1) = 
