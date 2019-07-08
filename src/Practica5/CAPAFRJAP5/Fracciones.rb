@@ -33,7 +33,7 @@ class Fracciones
   end
 
   def resta(f1,f2)
-    dens, num = (mcm(f1.den,f2.den))
+    dens = (mcm(f1.den,f2.den))
     num = ((dens/f1.den)*f1.num) - ((dens/f2.den)*f2.num)
     return "#{num}/#{dens}"
   end
@@ -48,9 +48,11 @@ class Fracciones
     return "#{num}/#{den}"
   end
 
-end
+end#FIN DE LA CLASE FRACCIONES
 
-#FIN DE LA CLASE FRACCIONES
+class FraccionesEgipcias
+  
+end#FIN DE LA CLASE FRACCIONES EGIPCIAS
 
 f1 = Fracciones.new(1,4)
 f2 = Fracciones.new(2,4)
