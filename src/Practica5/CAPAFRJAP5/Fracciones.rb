@@ -12,7 +12,7 @@ class Fracciones
     return @num
   end
 
-  def mcd(a,b)
+  def self.mcd(a,b)
     if(b==0) then
       return a
     else
@@ -20,32 +20,36 @@ class Fracciones
     end
   end
 
-  def mcm(a,b)
+  def self.mcm(a,b)
     n,d = a*b, mcd(a,b)
     res = n/d
     return res
   end
 
-  def suma(f1,f2)
+  def self.suma(f1,f2)
     dens = (mcm(f1.den,f2.den))
     num = ((dens/f1.den)*f1.num) + ((dens/f2.den)*f2.num)
-    return "#{num}/#{dens}"
+    faux = Fracciones.new(num,dens)
+    return faux
   end
 
-  def resta(f1,f2)
+  def self.resta(f1,f2)
     dens = (mcm(f1.den,f2.den))
     num = ((dens/f1.den)*f1.num) - ((dens/f2.den)*f2.num)
-    return "#{num}/#{dens}"
+    faux = Fracciones.new(num,dens)
+    return faux
   end
 
-  def multiplicacion(f1,f2)
+  def self.multiplicacion(f1,f2)
     num,den = f1.num*f2.num,f1.den*f2.den
-    return "#{num}/#{den}"
+    faux = Fracciones.new(num,den)
+    return faux
   end
 
-  def division(f1,f2)
+  def self.division(f1,f2)
     num,den = f1.num*f2.den,f1.den*f2.num
-    return "#{num}/#{den}"
+    faux = Fracciones.new(num,den)
+    return faux
   end
 
 end#FIN DE LA CLASE FRACCIONES
@@ -53,11 +57,11 @@ end#FIN DE LA CLASE FRACCIONES
 class FraccionesEgipcias
   
 end#FIN DE LA CLASE FRACCIONES EGIPCIAS
+##
+#f1 = Fracciones.new(32,27)
+#f2 = Fracciones.new(1,1)
+#div = (32/27)+1
+##
+#f = Fracciones.suma(f1,f2)
+#puts "#{div}/#{f.den}"
 
-f1 = Fracciones.new(1,4)
-f2 = Fracciones.new(2,4)
-
-puts "La suma es: #{f1.suma(f1,f2)}"
-puts "La resta es: #{f1.resta(f2,f1)}"
-puts "La multiplicacion es: #{f1.multiplicacion(f2,f1)}"
-puts "La multiplicacion es: #{f1.division(f1,f2)}"
