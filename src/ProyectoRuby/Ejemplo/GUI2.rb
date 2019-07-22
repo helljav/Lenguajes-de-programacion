@@ -1,9 +1,9 @@
 require 'TestProlog'
-require 'fox16'
 
-include Fox
 
-class GUI < FXMainWindow
+
+
+class GUI2
   ##
   # Diseño General de la ventana
   ##
@@ -144,7 +144,6 @@ class GUI < FXMainWindow
       # Accion para el boton buscar
       ##
       btnInfo.connect(SEL_COMMAND) do
-      
         if validaInstancia then
          r =  @prolog.hazInfoMovie("infoMovie(#{@infoPeli})")
           @textArea.setText("#{r[0]}")
@@ -219,9 +218,3 @@ class GUI < FXMainWindow
 
 end
 
-if __FILE__ == $0 then
-  @app = FXApp.new("AppSen")
-  ven = GUI.new(@app)
-  @app.create
-  @app.run
-end

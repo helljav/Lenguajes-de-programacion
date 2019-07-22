@@ -26,6 +26,20 @@ class Prolog
         end
     return res
   end
+  
+  
+  def hazInfoMovie(cmd)
+    @stdin.write("#{cmd}.\n")
+        res = @stdout.expect("true ",1)
+        if res == nil then
+          res = @stdout.expect("false.",1)
+        end
+        if res == nil then
+              res = @stdout.expect(/\]/,100)
+            end
+        return res
+   end
+
 
   def next
     # Obten el siguiente resultado
@@ -43,9 +57,9 @@ class Prolog
     @stderr.close
     sout = @stdout.readlines;
     @stdout.close
-    puts "Err #{serr}"
-    puts "Out #{sout}"
-    puts @wt.value
+    #puts "Err #{serr}"
+    #puts "Out #{sout}"
+    #puts @wt.value
   end
 end
 
